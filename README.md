@@ -9,5 +9,3 @@ npm run fakeapi  // api running on 3001
 on second terminal :
 npm start 
 ```
-
-
