@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Users from './repos/Users';
-
+import { Link } from 'react-router-dom';
 
 const Comments = ({comments}) => {
     return <div className="col-12">
@@ -42,7 +42,7 @@ class UserDetails extends  React.Component {
     }
 };
 const UserPresentation = ({user}) => {
-    return <h5 className="card-header">{user.name}</h5>;
+    return <h5>{user.name}</h5>;
 };
 
 class Posts extends React.Component {
@@ -58,16 +58,16 @@ class Posts extends React.Component {
     }
 
     componentDidMount() {
-        Users.getPosts(this.state.userId).
-            then((posts) => {
+        Users.getPosts(this.state.userId)
+            .then((posts) => {
                 this.setState({posts});
                 return posts;
-            }).
-            then((posts) => {
+            })
+            .then((posts) => {
                 const proms = posts.map((post) => Users.getComments(post.id));
                 return Promise.all(proms);
-            }).
-            then((values) => {
+            })
+            .then((values) => {
                 this.setState({
                     comments: values
                 });
@@ -129,7 +129,12 @@ class UserPosts extends React.Component {
             <div className="row">
                 <div className="col">
                     <div className="card">
-                        {this.state.user && <UserPresentation user={this.state.user}/>}
+                        <div className="card-header">
+                            <div className="float-left">
+                                <Link to={'/'}><i class="fas fa-long-arrow-alt-left"></i> Home</Link>
+                            </div>
+                            {this.state.user && <UserPresentation user={this.state.user}/>}
+                        </div>
                         <div className="card-body text-left">
                             <div className="row">
                                 <div className="col-12 col-md-8">

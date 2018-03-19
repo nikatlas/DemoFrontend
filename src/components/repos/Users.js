@@ -5,13 +5,13 @@ class Users {
         let users = [];
         let comments = [];
         let posts = [];
-        return Net.get('users').
-            then((data) => users = data).
-            then(() => Net.get('posts')).
-            then((data) => posts = data).
-            then(() => Net.get('comments')).
-            then((data) => comments = data).
-            then(() => this._format(users, comments, posts));
+        return Net.get('users')
+            .then((data) => users = data)
+            .then(() => Net.get('posts'))
+            .then((data) => posts = data)
+            .then(() => Net.get('comments'))
+            .then((data) => comments = data)
+            .then(() => this._format(users, comments, posts));
     }
 
     getUser(id) {
